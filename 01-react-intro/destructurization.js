@@ -25,27 +25,47 @@
 // const phone = user[3]
 
 // const [name, age, , phone] = user
+// const [name, age, ...rest] = user
+// console.log(name, age, rest)
 
-// console.log(name, age, phone)
+// const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+// const numbers2 = [10, 11, 12, 13, 14, 15]
+//
+// const mergedArrays = [...numbers, ...numbers2]
+//
+// console.log(mergedArrays)
 
 
-
+// const user = {
+//   name: 'John',
+//   age: 30,
+//   isAdmin: true,
+//   phone: '123-456-7890',
+//   address: {
+//     city: 'New York',
+//     street: 'Broadway'
+//   }
+// }
+//
+// function sayHi ({ name, age, ...rest }) {
+//   console.log(`Hi, ${name}!`)
+// }
+//
+// if (user) {
+//   console.log(sayHi(user))
+// }
 
 const user = {
   name: 'John',
   age: 30,
+}
+
+const additionalUserFields = {
+  name: 'John Doe',
   isAdmin: true,
   phone: '123-456-7890',
-  address: {
-    city: 'New York',
-    street: 'Broadway'
-  }
 }
 
-function sayHi ({ name }) {
-  console.log(`Hi, ${name}!`)
-}
+const mergedUser = { ...user, ...additionalUserFields }
 
-if (user) {
-  console.log(sayHi(user))
-}
+console.log(mergedUser)

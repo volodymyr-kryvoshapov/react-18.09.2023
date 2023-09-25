@@ -9,14 +9,6 @@ const animals = [
   { name: 'Rabbit', emoji: '🐰', isMammal: true, color: 'white', id: 5 },
 ]
 
-const todoList = [
-  { id: 1, text: 'Learn React', isCompleted: true },
-  { id: 2, text: 'Learn Redux', isCompleted: false },
-  { id: 3, text: 'Learn React Router', isCompleted: false },
-  { id: 4, text: 'Learn React Native', isCompleted: false },
-  { id: 5, text: 'Learn GraphQL', isCompleted: false },
-]
-
 const AnimalItem = ({ animal }) => (
   <tr>
     <td>{animal.name}</td>
@@ -26,21 +18,34 @@ const AnimalItem = ({ animal }) => (
   </tr>
 );
 
-const List = ({ animals }) => (
-  <table>
-    <thead>
+const List = ({ animals }) => {
+  const [list, setList] = React.useState(animals) // [], {}
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      const newAnimal = { name: 'Tiger', emoji: '🐯', isMammal: true, color: 'orange', id: 6 }
+
+      setList([...list, newAnimal])
+      console.log(newAnimal)
+    }, 1000)
+  }, [list])
+
+  return (
+    <table>
+      <thead>
       <tr>
         <th>Name</th>
         <th>Emoji</th>
         <th>Is Mammal</th>
         <th>Color</th>
       </tr>
-    </thead>
-    <tbody>
-    {animals.map((animal) => <AnimalItem key={animal.id} animal={animal} />)}
-    </tbody>
-  </table>
-)
+      </thead>
+      <tbody>
+      {list.map((animal) => <AnimalItem key={animal.id} animal={animal} />)}
+      </tbody>
+    </table>
+  )
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
