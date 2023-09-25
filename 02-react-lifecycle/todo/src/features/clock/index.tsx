@@ -4,7 +4,11 @@ interface ClockProps {
   initialDate: Date,
 }
 
-export class Clock extends React.Component {
+interface ClockState {
+  date: Date,
+}
+
+export class Clock extends React.Component<ClockProps, ClockState> {
   intervalId: any;
 
   constructor(props: ClockProps) {
@@ -27,12 +31,8 @@ export class Clock extends React.Component {
     console.log('tick', date.toLocaleTimeString());
   }
 
-  componentDidUpdate(prevProps: Readonly<{ initialDate: Date }>, prevState: Readonly<{}>, snapshot?: any) {
-    // @ts-ignore
-    const { initialDate } = this.props;
-    const { initialDate: prevInitialDate } = prevProps;
-
-    if (initialDate !== prevInitialDate) {
+  componentDidUpdate(prevProps: Readonly<ClockProps>, prevState: Readonly<ClockState>, snapshot?: any) {
+    if (prevProps.initialDate !== this.props.initialDate) {
       // make server request
     }
   }
@@ -42,7 +42,6 @@ export class Clock extends React.Component {
   }
 
   render() {
-    // @ts-ignore
     const { date } = this.state;
 
     return (

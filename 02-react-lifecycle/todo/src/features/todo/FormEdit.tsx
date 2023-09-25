@@ -1,7 +1,8 @@
 import React, {useState} from "react";
+import {Todo} from "./type";
 
 interface FormEditProps {
-  onTodoSubmit: any;
+  onTodoSubmit: (todo: Todo) => void;
 }
 
 export function FormEdit({ onTodoSubmit }: FormEditProps) {
