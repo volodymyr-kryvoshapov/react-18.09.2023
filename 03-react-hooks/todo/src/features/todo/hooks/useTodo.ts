@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useCallback, useMemo} from "react";
 import {TodoI} from "../type";
 import {TodoApi} from "../api/server";
 
@@ -11,11 +11,19 @@ export function useTodo() {
   const [editingTodo, setEditingTodo] = React.useState<TodoI>(DEFAULT_TODO)
   const [list, setList] = React.useState<TodoI[]>([])
 
-  useEffect(() => {
+  const getList = useCallback(() => {
     TodoApi.getList().then((todoList) => {
       setList(todoList)
     })
   }, [])
+
+  // const res = useMemo(() => {
+  //   return a + b
+  // }, [a, b])
+
+  useEffect(() => {
+    getList()
+  }, [getList])
 
   const onTodoSubmit = (todo: TodoI) => {
     if (todo.id) {
@@ -23,14 +31,12 @@ export function useTodo() {
         setList(list.map((todo) => todo.id === updatedTodo.id ? updatedTodo : todo))
         setEditingTodo(DEFAULT_TODO)
       })
-
-      return
+    } else {
+      TodoApi.create(todo).then((newTodo) => {
+        setList([...list, newTodo])
+        setEditingTodo({ ...DEFAULT_TODO })
+      })
     }
-
-    TodoApi.create(todo).then((newTodo) => {
-      setList([...list, newTodo])
-      setEditingTodo(DEFAULT_TODO)
-    })
   }
 
   const deleteTodo = (id: number) => {
