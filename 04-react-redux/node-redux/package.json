@@ -1,0 +1,18 @@
+{
+  "name": "crypto-super-fast",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "cow": "cowsay -- -r",
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cowsay": "1.5.0",
+    "redux": "^4.2.1"
+  }
+}
