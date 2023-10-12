@@ -22,6 +22,14 @@ function setAction (count) {
   return { type: ACTION_COUNTER_SET, payload: count }
 }
 
+function setAsyncAction (count) {
+  return function (dispatch, getState, extraArgument) {
+    setTimeout(() => { // make server call
+      dispatch(setAction(10))
+    }, 2000)
+  }
+}
+
 function incAction () {
   return { type: ACTION_COUNTER_INC }
 }
@@ -30,7 +38,7 @@ function decAction () {
   return { type: ACTION_COUNTER_DEC }
 }
 
-store.dispatch(setAction(1))
+store.dispatch(setAsyncAction(1))
 store.dispatch(incAction())
 store.dispatch(incAction())
 store.dispatch(incAction())
