@@ -5,7 +5,7 @@ export class FetchClient<T> {
     this.url = url
   }
 
-  request(path = '', method = 'GET', data?: T): Promise<any> {
+  request<D>(path = '', method = 'GET', data?: T): Promise<D> {
     return fetch(`${this.url}${path}`, {
       method,
       body: JSON.stringify(data),
@@ -24,19 +24,19 @@ export class FetchClient<T> {
 
   getList(): Promise<T[]> {
     return this
-      .request()
+      .request<T[]>()
       .catch((e) => Promise.reject(Error(`Can't fetch list from server: ${e.message}`)))
   }
 
   create(data: T): Promise<T> {
-    return this.request('', 'POST', data)
+    return this.request<T>('', 'POST', data)
   }
 
   update(id: number, data: T): Promise<T> {
-    return this.request(String(id), 'PUT', data)
+    return this.request<T>(String(id), 'PUT', data)
   }
 
   delete(id: number): Promise<void> {
-    return this.request(String(id), 'DELETE')
+    return this.request<void>(String(id), 'DELETE')
   }
 }
