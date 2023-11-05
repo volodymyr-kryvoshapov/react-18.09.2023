@@ -1,0 +1,28 @@
+/*
+0. !important
+1. inline
+2. id
+3. class
+4. tag
+*/
+
+#yellow {
+    color: yellow;
+}
+
+.blue {
+    color: blue;
+}
+
+h1 {
+    color: red;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    border: 10px solid black;
+    margin: 50px;
+    padding: 20px;
+    background-color: #eee;
+}
